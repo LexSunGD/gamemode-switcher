@@ -9,9 +9,21 @@ namespace switcher {
         void customSetup() {
             PauseLayer::customSetup();
 
-            auto rightMenu = typeinfo_cast<CCMenu*>(this->getChildByID("right-button-menu"));
+            CCMenu* rightMenu = nullptr;
+            auto children = this->getChildren();
+            
+            if (children) {
+                for (int i = 0; i < children->count(); ++i) {
+                    auto child = typeinfo_cast<CCMenu*>(children->objectAtIndex(i));
+                    if (child && child->getPositionX() > 250.0f) {
+                        rightMenu = child;
+                        break;
+                    }
+                }
+            }
+
             if(!rightMenu) {
-                log::error("right-button-menu not found!");
+                log::error("The right menu could not be found natively.");
                 return;
             }
 
@@ -19,9 +31,8 @@ namespace switcher {
                 switcher::SwitcherPopup::create()->show();
             });
 
-            button->setID("gamemode-editor-button"_spr);
-
             rightMenu->addChild(button);
+            
             rightMenu->updateLayout();
         }
     };
