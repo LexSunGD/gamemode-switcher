@@ -15,11 +15,6 @@
 	"version": "v1.0.10",
 	"developer": "capeling",
 	"description": "Geometry Dash player editor.",
-	"dependencies": {
-		"geode.node-ids": {
-			"version": ">=1.18.0",
-			"importance": "suggested"
-		}
 	},
 	"resources": {
 		"spritesheets": {
